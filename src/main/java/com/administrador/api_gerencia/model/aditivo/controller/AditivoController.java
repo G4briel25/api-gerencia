@@ -20,12 +20,12 @@ public class AditivoController {
     }
 
     @GetMapping("listar")
-    public List<Aditivo> listar(@PathVariable("convenioId") Long _convenioId) {
+    public List<Aditivo> listar() {
         return service.listar();
     }
 
     @GetMapping("{id}")
-    public Aditivo buscarPorId(@PathVariable("convenioId") Long _convenioId, @PathVariable("id") Long _id) {
+    public Aditivo buscarPorId(@PathVariable("id") Long _id) {
         return service.buscarPorId(_id);
     }
 

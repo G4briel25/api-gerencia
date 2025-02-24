@@ -2,8 +2,6 @@ package com.administrador.api_gerencia.model.aditivo.controller;
 
 import com.administrador.api_gerencia.model.aditivo.Aditivo;
 import com.administrador.api_gerencia.model.aditivo.service.AditivoService;
-import com.administrador.api_gerencia.model.convenio.Convenio;
-import com.administrador.api_gerencia.model.convenio.service.ConvenioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,26 +11,21 @@ import org.springframework.web.bind.annotation.*;
 public class AditivoADMController {
 
     private final AditivoService service;
-    private final ConvenioService convenioService;
 
-    public AditivoADMController(AditivoService service, ConvenioService convenioService) {
+    public AditivoADMController(AditivoService service) {
         this.service = service;
-        this.convenioService = convenioService;
     }
 
     @PostMapping
     public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
-        Convenio convenio = convenioService.buscarPorId(convenioId);
-        if (convenio == null) {
-            return ResponseEntity.notFound().build();
-        }
-        aditivo.setId(convenio);
-        return ResponseEntity.ok(aditivo);
+        aditivo.setConvenioId(convenioId);
+        Aditivo obj = service.salvar(aditivo);
+        return ResponseEntity.ok(obj);
     }
 
 
-    @PutMapping("{_aditivoId}")
-    public Aditivo editar(@PathVariable("_aditivoId") Long _aditivoId) {
+    @PutMapping("{aditivoId}")
+    public Aditivo editar(@PathVariable("aditivoId") Long _aditivoId) {
         Aditivo obj = service.buscarPorId(_aditivoId);
         return service.editar(obj);
     }

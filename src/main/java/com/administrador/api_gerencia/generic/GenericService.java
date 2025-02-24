@@ -2,8 +2,6 @@ package com.administrador.api_gerencia.generic;
 
 import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -1,5 +1,7 @@
 package com.administrador.api_gerencia.model.convenio;
 
+import com.administrador.api_gerencia.model.aditivo.Aditivo;
+import com.administrador.api_gerencia.model.lancamento.Lancamento;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -10,17 +12,21 @@ import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @Entity
+@ToString
 @Table(name = "convenio", schema = "dm_convenio")
-public class Convenio implements Serializable {
+public class ConvenioDetalhado implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -76,4 +82,15 @@ public class Convenio implements Serializable {
     @NotBlank
     @Column(name = "situacao_descricao")
     private String situacaoDescricao;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Transient
+    private List<Aditivo> aditivos = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Transient
+    private List<Lancamento> lancamentos = new ArrayList<>();
+
 }

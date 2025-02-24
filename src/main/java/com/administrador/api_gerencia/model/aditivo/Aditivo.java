@@ -1,6 +1,5 @@
 package com.administrador.api_gerencia.model.aditivo;
 
-import com.administrador.api_gerencia.model.lancamento.Lancamento;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -11,17 +10,18 @@ import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 @Entity
+@ToString
 @Table(name = "aditivo", schema = "dm_convenio")
 public class Aditivo implements Serializable {
 
@@ -29,33 +29,37 @@ public class Aditivo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
+    @Column(name = "id")
     private Long id;
 
     @NotBlank
+    @Column(name = "numero_aditivo")
     private String numeroAditivo;
 
     @NotBlank
+    @Column(name = "responsaveis")
     private String responsaveis;
 
-    @NotBlank
-    private String situacaoDescricaoAditivo;
-
-    @NotNull
+    @Column(name = "data_inicio")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataInicio;
 
+    @Column(name = "data_fim")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataFim;
 
     @NotNull
+    @NumberFormat(pattern = "#,##0.00")
+    @Column(name = "valor_total_aditivo")
     private BigDecimal valorTotalAditivo;
 
-    private Long convenioId;
+    @NotBlank
+    @Column(name = "situacao_descricao_aditivo")
+    private String situacaoDescricaoAditivo;
 
-    @OneToMany(mappedBy = "aditivoId")
-    private List<Lancamento> lancamentos = new ArrayList<>();
+    @Column(name = "convenio_id", nullable = false)
+    private Long convenioId;
 
 }

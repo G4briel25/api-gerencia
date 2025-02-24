@@ -25,9 +25,21 @@ public class ConvenioADMController {
     }
 
     @PutMapping("{convenioId}")
-    public Convenio editar(@PathVariable("convenioId") Long _convenioId) {
-        Convenio obj = service.buscarPorId(_convenioId);
-        return service.editar(obj);
+    public ResponseEntity<Convenio> editar(@PathVariable("convenioId") Long _convenioId, @RequestBody Convenio _convenio) {
+        if(_convenio.getId() == null) {
+            throw new RuntimeException("Id não informado");
+        }
+        if(_convenio.getId().longValue() != _convenioId) {
+            throw new RuntimeException("O id do objeto está diferente do id da url, não pode salvar a alteração");
+        }
+
+        Convenio obj = this.service.buscarPorId(_convenio.getId());
+        if(obj==null){
+            throw new RuntimeException("Aditivo não encontrado na base de dados");
+        }
+
+        _convenio = service.editar(_convenio);
+        return ResponseEntity.ok(_convenio);
     }
 
     @DeleteMapping("{convenioId}")
