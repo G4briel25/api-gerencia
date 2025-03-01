@@ -1,5 +1,6 @@
 package com.administrador.api_gerencia.model.convenio.controller;
 
+import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import com.administrador.api_gerencia.model.convenio.Convenio;
 import com.administrador.api_gerencia.model.convenio.service.ConvenioService;
 import jakarta.validation.Valid;
@@ -18,24 +19,21 @@ public class ConvenioADMController {
 
     @PostMapping()
     public ResponseEntity<Convenio> salvar(@Valid @RequestBody Convenio _convenio) {
-        if(_convenio == null) {
-            return ResponseEntity.badRequest().build();
-        }
         return ResponseEntity.ok(service.salvar(_convenio));
     }
 
     @PutMapping("{convenioId}")
-    public ResponseEntity<Convenio> editar(@PathVariable("convenioId") Long _convenioId, @RequestBody Convenio _convenio) {
+    public ResponseEntity<Convenio> editar(@PathVariable("convenioId") Long _convenioId, @Valid @RequestBody Convenio _convenio) {
         if(_convenio.getId() == null) {
-            throw new RuntimeException("Id não informado");
+            throw new ResourceNotFoundException("Id não informado");
         }
         if(_convenio.getId().longValue() != _convenioId) {
             throw new RuntimeException("O id do objeto está diferente do id da url, não pode salvar a alteração");
         }
 
-        Convenio obj = this.service.buscarPorId(_convenio.getId());
-        if(obj==null){
-            throw new RuntimeException("Aditivo não encontrado na base de dados");
+        Convenio obj = service.buscarPorId(_convenio.getId());
+        if(obj == null){
+            throw new ResourceNotFoundException("Convênio não encontrado na base de dados.");
         }
 
         _convenio = service.editar(_convenio);

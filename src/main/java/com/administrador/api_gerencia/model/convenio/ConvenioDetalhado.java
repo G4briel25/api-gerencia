@@ -25,7 +25,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Entity
 @ToString
-@Table(name = "convenio", schema = "dm_convenio")
+@Table(name = "convenio", schema = "vw_convenio")
 public class ConvenioDetalhado implements Serializable {
 
     private static final long serialVersionUID = 1L;

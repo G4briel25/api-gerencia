@@ -1,10 +1,13 @@
 package com.administrador.api_gerencia.model.aditivo.controller;
 
+import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import com.administrador.api_gerencia.model.aditivo.Aditivo;
 import com.administrador.api_gerencia.model.aditivo.service.AditivoService;
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.module.ResolutionException;
 
 @RestController
 @RequestMapping("api/area-administrativa/convenios/{convenioId}/aditivos")
@@ -16,18 +19,32 @@ public class AditivoADMController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping()
+    public Aditivo salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
         aditivo.setConvenioId(convenioId);
         Aditivo obj = service.salvar(aditivo);
-        return ResponseEntity.ok(obj);
+        return obj;
     }
 
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping("{aditivoId}")
-    public Aditivo editar(@PathVariable("aditivoId") Long _aditivoId) {
+    public Aditivo editar(@PathVariable("aditivoId") Long _aditivoId, @Valid @RequestBody Aditivo _aditivo) {
+        if(_aditivo.getId() == null) {
+            throw new ResolutionException("Id não informado");
+        }
+        if(_aditivo.getId().longValue() != _aditivoId) {
+            throw new RuntimeException("O id do objeto está diferente do id da url, não pode salvar a alteração");
+        }
+
         Aditivo obj = service.buscarPorId(_aditivoId);
-        return service.editar(obj);
+        if (obj == null) {
+            throw new ResourceNotFoundException("Aditivo não encontrado na base de dados.");
+        }
+
+        _aditivo = service.editar(_aditivo);
+        return _aditivo;
     }
 
     @DeleteMapping("{_aditivoId}")

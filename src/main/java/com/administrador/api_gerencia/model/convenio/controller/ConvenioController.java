@@ -30,7 +30,6 @@ public class ConvenioController {
 
     @GetMapping("{convenioId}")
     public ConvenioDetalhado buscarPorId(@PathVariable("convenioId") Long _convenioId) {
-
         return convenioDetalhadoService.buscarConvenioDetalhado(_convenioId);
     }
 
