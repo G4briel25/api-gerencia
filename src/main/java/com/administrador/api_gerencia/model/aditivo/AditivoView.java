@@ -1,7 +1,5 @@
-package com.administrador.api_gerencia.model.convenio;
+package com.administrador.api_gerencia.model.aditivo;
 
-import com.administrador.api_gerencia.model.aditivo.Aditivo;
-import com.administrador.api_gerencia.model.lancamento.Lancamento;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -13,20 +11,19 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @Entity
 @ToString
-@Table(name = "convenio", schema = "vw_convenio")
-public class ConvenioDetalhado implements Serializable {
+@Table(name = "aditivo", schema = "vw_convenio")
+public class AditivoView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,61 +33,33 @@ public class ConvenioDetalhado implements Serializable {
     private Long id;
 
     @NotBlank
-    @Column(name = "numero_convenio")
-    private String numeroConvenio;
-
-    @NotBlank
-    @Column(name = "objeto")
-    private String objeto;
-
-    @NotBlank
-    @Column(name = "numero_processo")
-    private String numeroProcesso;
-
-    @NotBlank
-    @Column(name = "proponente")
-    private String proponente;
-
-    @NotBlank
-    @Column(name = "convenente")
-    private String convenente;
+    @Column(name = "numero_aditivo")
+    private String numeroAditivo;
 
     @NotBlank
     @Column(name = "responsaveis")
     private String responsaveis;
 
-    @NotNull
     @Column(name = "data_inicio")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataInicio;
 
-    @NotNull
     @Column(name = "data_fim")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataFim;
 
     @NotNull
-    @Column(name = "valor_total")
-    private BigDecimal valorTotal;
+    @NumberFormat(pattern = "#,##0.00")
+    @Column(name = "valor_total_aditivo")
+    private BigDecimal valorTotalAditivo;
 
     @NotBlank
-    @Column(name = "tipo_de_convenio")
-    private String tipoDeConvenio;
+    @Column(name = "situacao_descricao_aditivo")
+    private String situacaoDescricaoAditivo;
 
-    @NotBlank
-    @Column(name = "situacao_descricao")
-    private String situacaoDescricao;
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @Transient
-    private List<Aditivo> aditivos = new ArrayList<>();
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @Transient
-    private List<Lancamento> lancamentos = new ArrayList<>();
+    @Column(name = "convenio_id", nullable = false)
+    private Long convenioId;
 
 }
