@@ -4,10 +4,12 @@ import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import com.administrador.api_gerencia.model.aditivo.Aditivo;
 import com.administrador.api_gerencia.model.aditivo.service.AditivoService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.lang.module.ResolutionException;
+import java.net.URI;
 
 @RestController
 @RequestMapping("api/area-administrativa/convenios/{convenioId}/aditivos")
@@ -19,18 +21,21 @@ public class AditivoADMController {
         this.service = service;
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping()
-    public Aditivo salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
+    public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
         aditivo.setConvenioId(convenioId);
         Aditivo obj = service.salvar(aditivo);
-        return obj;
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(obj.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(obj);
     }
 
 
-    @ResponseStatus(HttpStatus.OK)
     @PutMapping("{aditivoId}")
-    public Aditivo editar(@PathVariable("aditivoId") Long _aditivoId, @Valid @RequestBody Aditivo _aditivo) {
+    public ResponseEntity<Aditivo> editar(@PathVariable("aditivoId") Long _aditivoId, @Valid @RequestBody Aditivo _aditivo) {
         if(_aditivo.getId() == null) {
             throw new ResolutionException("Id não informado");
         }
@@ -44,7 +49,7 @@ public class AditivoADMController {
         }
 
         _aditivo = service.editar(_aditivo);
-        return _aditivo;
+        return ResponseEntity.ok(_aditivo);
     }
 
     @DeleteMapping("{_aditivoId}")

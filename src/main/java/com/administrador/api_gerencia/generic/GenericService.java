@@ -18,7 +18,7 @@ public class GenericService<T, ID> {
     }
 
     public T buscarPorId(ID id) {
-        return repository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID " + id + " não encontrado."));
     }
 
     public T salvar(T entity) {
