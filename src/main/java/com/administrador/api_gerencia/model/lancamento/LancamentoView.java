@@ -38,10 +38,10 @@ public class LancamentoView implements Serializable {
     @Column(name = "valor_pago")
     private BigDecimal valorPago;
 
-    @Column(name = "convenio_id")
-    private Long convenio;
+    @Column(name = "convenio_id", nullable = false)
+    private Long convenioId;
 
     @Column(name = "aditivo_id")
-    private Long aditivo;
+    private Long aditivoId;
 
 }

@@ -22,9 +22,9 @@ public class AditivoADMController {
     }
 
     @PostMapping()
-    public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long convenioId, @Valid @RequestBody Aditivo aditivo) {
-        aditivo.setConvenioId(convenioId);
-        Aditivo obj = service.salvar(aditivo);
+    public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long _convenioId, @Valid @RequestBody Aditivo _aditivo) {
+        _aditivo.setConvenioId(_convenioId);
+        Aditivo obj = service.salvar(_aditivo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(obj.getId())
@@ -35,7 +35,14 @@ public class AditivoADMController {
 
 
     @PutMapping("{aditivoId}")
-    public ResponseEntity<Aditivo> editar(@PathVariable("aditivoId") Long _aditivoId, @Valid @RequestBody Aditivo _aditivo) {
+    public ResponseEntity<Aditivo> editar(
+            @PathVariable("aditivoId") Long _aditivoId,
+            @PathVariable("convenioId") Long _convenioId,
+            @Valid @RequestBody Aditivo _aditivo)
+    {
+        if(_convenioId != _aditivo.getConvenioId()) {
+            throw new ResourceNotFoundException("Convênio com ID " + _convenioId + " não encontrado.");
+        }
         if(_aditivo.getId() == null) {
             throw new ResolutionException("Id não informado");
         }
