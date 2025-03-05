@@ -1,7 +1,5 @@
 package com.administrador.api_gerencia.model.lancamento;
 
-import com.administrador.api_gerencia.model.aditivo.Aditivo;
-import com.administrador.api_gerencia.model.convenio.Convenio;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -11,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,32 +19,35 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode
 @Entity
+@ToString
 @Table(name = "lancamento", schema = "dm_convenio")
 public class Lancamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @Column(name = "data_repasse")
     private LocalDate dataRepasse;
 
     @NotNull
+    @Column(name = "exercicio")
     private Integer exercicio;
 
     @NotNull
+    @Column(name = "valor_pago")
     private BigDecimal valorPago;
 
-    @ManyToOne
-    @JoinColumn(name = "convenio_id", nullable = false)
-    private Convenio convenio;
+    @Column(name = "convenio_id", nullable = false)
+    private Long convenioId;
 
-    @ManyToOne
-    @JoinColumn(name = "aditivo_id")
-    private Aditivo aditivo;
+    @Column(name = "aditivo_id")
+    private Long aditivoId;
 
 }

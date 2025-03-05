@@ -1,13 +1,13 @@
 package com.administrador.api_gerencia.model.lancamento;
 
-import com.administrador.api_gerencia.model.aditivo.Aditivo;
-import com.administrador.api_gerencia.model.convenio.Convenio;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,29 +23,25 @@ import java.time.LocalDate;
 @Table(name = "lancamento", schema = "vw_convenio")
 public class LancamentoView implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @Column(name = "data_repasse")
     private LocalDate dataRepasse;
 
-    @NotNull
+    @Column(name = "exercicio")
     private Integer exercicio;
 
-    @NotNull
+    @Column(name = "valor_pago")
     private BigDecimal valorPago;
 
-    @ManyToOne
-    @JoinColumn(name = "convenio_id", nullable = false)
-    private Convenio convenio;
+    @Column(name = "convenio_id")
+    private Long convenio;
 
-    @ManyToOne
-    @JoinColumn(name = "aditivo_id")
-    private Aditivo aditivo;
+    @Column(name = "aditivo_id")
+    private Long aditivo;
 
 }
