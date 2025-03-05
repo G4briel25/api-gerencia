@@ -1,4 +1,4 @@
-package com.administrador.api_gerencia.model.lancamento;
+package com.administrador.api_gerencia.model.lancamento.aditivos;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Entity
 @Table(name = "lancamento", schema = "vw_convenio")
-public class LancamentoView implements Serializable {
+public class LancamentoAditivoView implements Serializable {
 
     @Id
     @Column(name = "id")

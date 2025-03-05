@@ -1,4 +1,4 @@
-package com.administrador.api_gerencia.model.lancamento;
+package com.administrador.api_gerencia.model.lancamento.convenio;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -21,7 +21,7 @@ import java.time.LocalDate;
 @Entity
 @ToString
 @Table(name = "lancamento", schema = "dm_convenio")
-public class Lancamento implements Serializable {
+public class LancamentoConvenio implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

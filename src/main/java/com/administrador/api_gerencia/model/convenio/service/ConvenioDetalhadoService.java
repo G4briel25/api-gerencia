@@ -5,7 +5,7 @@ import com.administrador.api_gerencia.generic.GenericService;
 import com.administrador.api_gerencia.model.aditivo.repository.AditivoRepository;
 import com.administrador.api_gerencia.model.convenio.ConvenioViewDetalhado;
 import com.administrador.api_gerencia.model.convenio.repository.ConvenioViewDetalhadoRepository;
-import com.administrador.api_gerencia.model.lancamento.repository.LancamentoRepository;
+import com.administrador.api_gerencia.model.lancamento.convenio.repository.LancamentoConvenioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -17,13 +17,13 @@ public class ConvenioDetalhadoService extends GenericService<ConvenioViewDetalha
 
     private final AditivoRepository aditivoRepository;
 
-    private final LancamentoRepository lancamentoRepository;
+    private final LancamentoConvenioRepository lancamentoConvenioRepository;
 
-    public ConvenioDetalhadoService(ConvenioViewDetalhadoRepository repository, AditivoRepository aditivoRepository, LancamentoRepository lancamentoRepository) {
+    public ConvenioDetalhadoService(ConvenioViewDetalhadoRepository repository, AditivoRepository aditivoRepository, LancamentoConvenioRepository lancamentoConvenioRepository) {
         super(repository);
         this.repository = repository;
         this.aditivoRepository = aditivoRepository;
-        this.lancamentoRepository = lancamentoRepository;
+        this.lancamentoConvenioRepository = lancamentoConvenioRepository;
     }
 
 
@@ -33,7 +33,7 @@ public class ConvenioDetalhadoService extends GenericService<ConvenioViewDetalha
             throw new ResourceNotFoundException("Convênio com ID " + convenioId + " não encontrado.");
         }
         obj.setAditivos(aditivoRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
-        obj.setLancamentos(lancamentoRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
+        obj.setLancamento(lancamentoConvenioRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
         return obj;
     }
 
