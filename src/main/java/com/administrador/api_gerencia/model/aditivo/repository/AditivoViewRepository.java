@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface AditivoViewRepository extends GenericRepository<AditivoView, Long> {
 
+    List<AditivoView> findByConvenioIdIn(List<Long> convenioIds);
     List<AditivoView> findByConvenioId(Long convenioId);
     Optional<AditivoView> findByIdAndConvenioId(Long id, Long convenioId);
 

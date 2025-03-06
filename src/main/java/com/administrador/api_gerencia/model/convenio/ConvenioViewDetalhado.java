@@ -1,7 +1,9 @@
 package com.administrador.api_gerencia.model.convenio;
 
 import com.administrador.api_gerencia.model.aditivo.Aditivo;
+import com.administrador.api_gerencia.model.aditivo.AditivoView;
 import com.administrador.api_gerencia.model.lancamento.convenio.LancamentoConvenio;
+import com.administrador.api_gerencia.model.lancamento.convenio.LancamentoConvenioView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
@@ -86,11 +88,11 @@ public class ConvenioViewDetalhado implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Transient
-    private List<Aditivo> aditivos = new ArrayList<>();
+    private List<AditivoView> aditivos = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Transient
-    private List<LancamentoConvenio> lancamento = new ArrayList<>();
+    private List<LancamentoConvenioView> lancamento = new ArrayList<>();
 
 }

@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface AditivoRepository extends GenericRepository<Aditivo, Long> {
 
-    List<Aditivo> findByConvenioIdIn(List<Long> convenioIds);
-
 }

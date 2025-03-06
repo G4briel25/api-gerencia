@@ -1,5 +1,6 @@
 package com.administrador.api_gerencia.model.aditivo.controller;
 
+import com.administrador.api_gerencia.model.aditivo.Aditivo;
 import com.administrador.api_gerencia.model.aditivo.AditivoView;
 import com.administrador.api_gerencia.model.aditivo.service.AditivoViewService;
 import com.administrador.api_gerencia.model.convenio.service.ConvenioViewService;

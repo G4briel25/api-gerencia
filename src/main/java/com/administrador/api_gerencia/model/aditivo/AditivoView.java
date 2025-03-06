@@ -1,6 +1,7 @@
 package com.administrador.api_gerencia.model.aditivo;
 
 import com.administrador.api_gerencia.model.lancamento.aditivos.LancamentoAditivo;
+import com.administrador.api_gerencia.model.lancamento.aditivos.LancamentoAditivoView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;

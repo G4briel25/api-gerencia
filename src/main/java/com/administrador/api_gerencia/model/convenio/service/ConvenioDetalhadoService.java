@@ -2,10 +2,10 @@ package com.administrador.api_gerencia.model.convenio.service;
 
 import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import com.administrador.api_gerencia.generic.GenericService;
-import com.administrador.api_gerencia.model.aditivo.repository.AditivoRepository;
+import com.administrador.api_gerencia.model.aditivo.repository.AditivoViewRepository;
 import com.administrador.api_gerencia.model.convenio.ConvenioViewDetalhado;
 import com.administrador.api_gerencia.model.convenio.repository.ConvenioViewDetalhadoRepository;
-import com.administrador.api_gerencia.model.lancamento.convenio.repository.LancamentoConvenioRepository;
+import com.administrador.api_gerencia.model.lancamento.convenio.repository.LancamentoConvenioViewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -15,15 +15,15 @@ public class ConvenioDetalhadoService extends GenericService<ConvenioViewDetalha
 
     private final ConvenioViewDetalhadoRepository repository;
 
-    private final AditivoRepository aditivoRepository;
+    private final AditivoViewRepository aditivoViewRepository;
 
-    private final LancamentoConvenioRepository lancamentoConvenioRepository;
+    private final LancamentoConvenioViewRepository lancamentoConvenioViewRepository;
 
-    public ConvenioDetalhadoService(ConvenioViewDetalhadoRepository repository, AditivoRepository aditivoRepository, LancamentoConvenioRepository lancamentoConvenioRepository) {
+    public ConvenioDetalhadoService(ConvenioViewDetalhadoRepository repository, AditivoViewRepository aditivoViewRepository, LancamentoConvenioViewRepository lancamentoConvenioViewRepository) {
         super(repository);
         this.repository = repository;
-        this.aditivoRepository = aditivoRepository;
-        this.lancamentoConvenioRepository = lancamentoConvenioRepository;
+        this.aditivoViewRepository = aditivoViewRepository;
+        this.lancamentoConvenioViewRepository = lancamentoConvenioViewRepository;
     }
 
 
@@ -32,8 +32,12 @@ public class ConvenioDetalhadoService extends GenericService<ConvenioViewDetalha
         if (obj == null) {
             throw new ResourceNotFoundException("Convênio com ID " + convenioId + " não encontrado.");
         }
-        obj.setAditivos(aditivoRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
-        obj.setLancamento(lancamentoConvenioRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
+        obj.setAditivos(aditivoViewRepository.findByConvenioIdIn(Collections.singletonList(convenioId)));
+        obj.setLancamento(lancamentoConvenioViewRepository.findByConvenioIdIn(Collections.singletonList(convenioId))
+                .stream()
+                .filter(lancamento -> lancamento.getAditivoId() == null)
+                .toList()
+        );
         return obj;
     }
 

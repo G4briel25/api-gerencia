@@ -24,7 +24,14 @@ public class AditivoViewService extends GenericService<AditivoView, Long> {
     }
 
     public List<AditivoView> listarAditivoPorConvenioId(Long convenioId) {
-        return repository.findByConvenioId(convenioId);
+        List<AditivoView> aditivos = repository.findByConvenioId(convenioId);
+
+        // Para cada aditivo, buscar e adicionar os lançamentos
+        aditivos.forEach(aditivo ->
+                aditivo.setLancamento(lancamentoAditivoRepository.findByAditivoId(aditivo.getId()))
+        );
+
+        return aditivos;
     }
 
     public AditivoView buscarAditivoPorIdEConvenio(Long aditivoId, Long convenioId) {
