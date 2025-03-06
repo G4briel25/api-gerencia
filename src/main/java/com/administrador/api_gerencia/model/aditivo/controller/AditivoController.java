@@ -1,6 +1,8 @@
 package com.administrador.api_gerencia.model.aditivo.controller;
 
+import com.administrador.api_gerencia.model.aditivo.Aditivo;
 import com.administrador.api_gerencia.model.aditivo.AditivoView;
+import com.administrador.api_gerencia.model.aditivo.service.AditivoService;
 import com.administrador.api_gerencia.model.aditivo.service.AditivoViewService;
 import com.administrador.api_gerencia.model.convenio.service.ConvenioViewService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,18 +16,19 @@ import java.util.List;
 @RequestMapping("api/convenios/{convenioId}/aditivos")
 public class AditivoController {
 
+    private final AditivoService aditivoService;
     private final AditivoViewService service;
     private final ConvenioViewService convenioViewService;
 
-    public AditivoController(AditivoViewService aditivoViewService, ConvenioViewService convenioViewService) {
+    public AditivoController(AditivoService aditivoService, AditivoViewService aditivoViewService, ConvenioViewService convenioViewService) {
+        this.aditivoService = aditivoService;
         this.service = aditivoViewService;
         this.convenioViewService = convenioViewService;
     }
 
     @GetMapping("listar")
-    public List<AditivoView> listar(@PathVariable("convenioId") Long _convenioId) {
-        convenioViewService.buscarPorId(_convenioId);
-        return service.listarAditivoPorConvenioId(_convenioId);
+    public List<Aditivo> listar() {
+        return aditivoService.listar();
     }
 
     @GetMapping("{id}")

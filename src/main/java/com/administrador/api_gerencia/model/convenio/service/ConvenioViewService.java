@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConvenioViewService extends GenericService<ConvenioView, Long> {
 
-    private final ConvenioViewRepository repository;
-
     public ConvenioViewService(ConvenioViewRepository repository) {
         super(repository);
-        this.repository = repository;
     }
 
 }
