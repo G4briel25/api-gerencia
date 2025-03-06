@@ -1,6 +1,5 @@
 package com.administrador.api_gerencia.model.aditivo;
 
-import com.administrador.api_gerencia.model.lancamento.aditivos.LancamentoAditivo;
 import com.administrador.api_gerencia.model.lancamento.aditivos.LancamentoAditivoView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -58,6 +57,6 @@ public class AditivoView implements Serializable {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Transient
-    private List<LancamentoAditivo> lancamento = new ArrayList<>();
+    private List<LancamentoAditivoView> lancamento = new ArrayList<>();
 
 }
