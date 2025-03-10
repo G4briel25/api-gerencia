@@ -6,6 +6,9 @@ import com.administrador.api_gerencia.service.ConvenioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("api/area-administrativa/convenios")
@@ -18,8 +21,16 @@ public class ConvenioADMController {
     }
 
     @PostMapping()
-    public ResponseEntity<Convenio> salvar(@Valid @RequestBody Convenio _convenio) {
-        return ResponseEntity.ok(service.salvar(_convenio));
+    public ResponseEntity<Convenio> salvar(
+            @Valid @RequestBody Convenio _convenio
+    ) {
+        Convenio obj = service.salvar(_convenio);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(obj.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(obj);
     }
 
     @PutMapping("{convenioId}")

@@ -22,7 +22,10 @@ public class AditivoADMController {
     }
 
     @PostMapping()
-    public ResponseEntity<Aditivo> salvar(@PathVariable("convenioId") Long _convenioId, @Valid @RequestBody Aditivo _aditivo) {
+    public ResponseEntity<Aditivo> salvar(
+            @PathVariable("convenioId") Long _convenioId,
+            @Valid @RequestBody Aditivo _aditivo
+    ) {
         _aditivo.setConvenioId(_convenioId);
         Aditivo obj = service.salvar(_aditivo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()

@@ -23,10 +23,13 @@ public class Usuario implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email")
+    @Column(name = "login", nullable = false, unique = true)
+    private String login;
+
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "senha")
+    @Column(name = "senha", nullable = false)
     private String senha;
 
 }
