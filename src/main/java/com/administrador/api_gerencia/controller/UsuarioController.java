@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("api/usuario")
 public class UsuarioController {
 
     private final UsuarioService service;
@@ -21,12 +21,12 @@ public class UsuarioController {
         this.service = service;
     }
 
-    @GetMapping("listar")
+    @GetMapping
     public List<Usuario> listarTodos() {
         return service.listar();
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Usuario> salvar(@Valid @RequestBody Usuario usuario) {
         Usuario obj = service.salvar(usuario);
 
@@ -38,15 +38,17 @@ public class UsuarioController {
         return ResponseEntity.created(location).body(obj);
     }
 
-    @PutMapping
-    public Usuario alterar(@RequestBody Usuario usuario) {
-        return service.editar(usuario);
+    @PutMapping("{id}")
+    public ResponseEntity<Usuario> alterar(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
+        usuario.setId(id);
+        Usuario obj = service.editar(usuario);
+        return ResponseEntity.ok(obj);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
         service.deletar(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }

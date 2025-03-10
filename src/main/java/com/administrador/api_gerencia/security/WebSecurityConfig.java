@@ -48,20 +48,17 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-
-                        // Permitir acesso público aos endpoints de autenticação e usuário
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuario/listar").authenticated()
-                        .requestMatchers("/usuario/**").permitAll()
-
-                        // Permitir acesso público aos endpoints GET
-                        .requestMatchers(HttpMethod.GET, "/api/convenios/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/usuario").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/usuario/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/usuario/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/usuario/**").permitAll()
 
                         // Proteger endpoints administrativos (POST, PUT, DELETE)
                         .requestMatchers("/api/area-administrativa/**").authenticated()
 
-                        // Qualquer outra requisição precisa de autenticação
-                        .anyRequest().authenticated()
+                        // Qualquer outra requisição não precisa de autenticação
+                        .anyRequest().permitAll()
                 );
 
                 http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
