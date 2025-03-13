@@ -3,12 +3,13 @@ package com.administrador.api_gerencia.security.services;
 import com.administrador.api_gerencia.security.dto.AcessDTO;
 import com.administrador.api_gerencia.security.dto.AuthenticationDTO;
 import com.administrador.api_gerencia.security.jwt.JwtUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthService {
@@ -41,9 +42,8 @@ public class AuthService {
             return accessDto;
 
         }catch(BadCredentialsException e) {
-            //TODO LOGIN OU SENHA INVALIDO
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
-        return new AcessDTO("Acesso negado");
     }
 
 }
