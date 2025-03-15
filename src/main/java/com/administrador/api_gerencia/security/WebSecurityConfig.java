@@ -49,15 +49,9 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/usuario").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/api/usuario/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/usuario/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/usuario/**").permitAll()
 
                         // Proteger endpoints administrativos (POST, PUT, DELETE)
                         .requestMatchers("/api/area-administrativa/**").authenticated()
-
-                        // Qualquer outra requisição não precisa de autenticação
                         .anyRequest().permitAll()
                 );
 

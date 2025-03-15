@@ -39,6 +39,10 @@ public class AuthService {
 
             AcessDTO accessDto = new AcessDTO(token);
 
+            System.out.println("=====================================");
+            System.out.println("Usuário " + authDto.getUsername() + " conectado ao sistema.");
+            System.out.println("=====================================");
+
             return accessDto;
 
         }catch(BadCredentialsException e) {

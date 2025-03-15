@@ -4,6 +4,7 @@ import com.administrador.api_gerencia.model.Usuario;
 import com.administrador.api_gerencia.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,6 +22,7 @@ public class UsuarioController {
         this.service = service;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<Usuario> listarTodos() {
         return service.listar();

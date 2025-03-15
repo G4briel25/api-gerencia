@@ -5,6 +5,7 @@ import com.administrador.api_gerencia.model.Convenio;
 import com.administrador.api_gerencia.service.ConvenioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -12,6 +13,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("api/area-administrativa/convenios")
+@PreAuthorize("hasRole('ADMIN')")
 public class ConvenioADMController {
 
     private final ConvenioService service;
