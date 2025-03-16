@@ -40,17 +40,17 @@ public class UsuarioController {
         return ResponseEntity.created(location).body(obj);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Usuario> alterar(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
-        usuario.setId(id);
-        Usuario obj = service.editar(usuario);
-        return ResponseEntity.ok(obj);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
-        service.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @PutMapping("{id}")
+//    public ResponseEntity<Usuario> alterar(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
+//        usuario.setId(id);
+//        Usuario obj = service.editar(usuario);
+//        return ResponseEntity.ok(obj);
+//    }
+//
+//    @DeleteMapping("{id}")
+//    public ResponseEntity<Void> excluir(@PathVariable("id") Long id){
+//        service.deletar(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
 }

@@ -48,10 +48,6 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-
-                        // Proteger endpoints administrativos (POST, PUT, DELETE)
-                        .requestMatchers("/api/area-administrativa/**").authenticated()
                         .anyRequest().permitAll()
                 );
 
