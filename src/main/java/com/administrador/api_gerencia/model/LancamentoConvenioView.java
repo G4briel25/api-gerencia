@@ -12,7 +12,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -21,7 +20,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @Entity
 @Table(name = "lancamento", schema = "vw_convenio")
-public class LancamentoConvenioView implements Serializable {
+public class LancamentoConvenioView {
 
     @Id
     @Column(name = "id")

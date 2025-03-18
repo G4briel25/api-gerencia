@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import java.util.List;
 @Entity
 @ToString
 @Table(name = "aditivo", schema = "vw_convenio")
-public class AditivoView implements Serializable {
+public class AditivoView {
 
     @Id
     @Column(name = "id")

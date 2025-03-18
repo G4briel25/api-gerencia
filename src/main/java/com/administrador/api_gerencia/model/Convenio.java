@@ -59,7 +59,6 @@ public class Convenio implements Serializable {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dataInicio;
 
-    @NotNull
     @Column(name = "data_fim")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

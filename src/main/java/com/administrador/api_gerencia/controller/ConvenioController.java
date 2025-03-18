@@ -36,7 +36,12 @@ public class ConvenioController {
     }
 
     @GetMapping("{convenioId}")
-    public ConvenioViewDetalhado buscarPorId(@PathVariable("convenioId") Long _convenioId) {
+    public ConvenioView buscarPorId(@PathVariable("convenioId") Long _convenioId) {
+        return convenioViewService.buscarPorId(_convenioId);
+    }
+
+    @GetMapping("{convenioId}/detalhado")
+    public ConvenioViewDetalhado buscarPorIdDetalhado(@PathVariable("convenioId") Long _convenioId) {
         return convenioDetalhadoService.buscarConvenioDetalhado(_convenioId);
     }
 
