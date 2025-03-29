@@ -19,7 +19,7 @@ public class LancamentoConvenioViewService extends GenericService<LancamentoConv
     }
 
     public List<LancamentoConvenioView> listarLancamentoPorConvenioId(Long convenioId) {
-        return repository.findByConvenioIdAndAditivoIdIsNull(convenioId);
+        return repository.findByConvenioIdAndAditivoIdIsNullOrderedByIdDesc(convenioId);
     }
 
     public LancamentoConvenioView buscarLancamentoPorIdEConvenio(Long lancamentoId, Long convenioId) {
