@@ -40,6 +40,7 @@ public class Aditivo implements Serializable {
     @Column(name = "responsaveis")
     private String responsaveis;
 
+    @NotNull
     @Column(name = "data_inicio")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

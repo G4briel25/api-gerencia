@@ -30,7 +30,7 @@ public class LancamentoAditivoController {
         this.convenioViewService = convenioViewService;
     }
 
-    @GetMapping("listar")
+    @GetMapping("listar-lancamentos-do-aditivo")
     public List<LancamentoAditivoView> listar(
             @PathVariable("convenioId") Long _convenioId,
             @PathVariable("aditivoId") Long _aditivoId

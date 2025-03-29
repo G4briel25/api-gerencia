@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface LancamentoConvenioViewRepository extends GenericRepository<LancamentoConvenioView, Long> {
 
     List<LancamentoConvenioView> findByConvenioIdIn(List<Long> convenioIds);
-    List<LancamentoConvenioView> findByConvenioId(Long convenioId);
+    List<LancamentoConvenioView> findByConvenioIdAndAditivoIdIsNull(Long convenioId);
     Optional<LancamentoConvenioView> findByIdAndConvenioId(Long id, Long convenioId);
 
 }
