@@ -12,13 +12,11 @@ import java.util.Optional;
 @Repository
 public interface LancamentoAditivoViewRepository extends GenericRepository<LancamentoAditivoView, Long> {
 
-
     List<LancamentoAditivoView> findByAditivoId(Long aditivoId);
     List<LancamentoAditivoView> findByAditivoIdIn(Collection<Long> aditivoIds);
 
     @Query("SELECT l FROM LancamentoAditivoView l WHERE l.convenioId = :convenioId AND l.aditivoId = :aditivoId ORDER BY l.id DESC")
     List<LancamentoAditivoView> findByConvenioIdAndAditivoIdOrderedByIdDesc(Long convenioId, Long aditivoId);
-
 
     Optional<LancamentoAditivoView> findByIdAndConvenioIdAndAditivoId(Long id, Long convenioId, Long aditivoId);
 
