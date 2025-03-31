@@ -82,8 +82,8 @@ public class LancamentoConvenioController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("{_lancamentoId}")
-    public void deletar(@PathVariable("_lancamentoId") Long _lancamentoId) {
+    @DeleteMapping("{lancamentoId}")
+    public void deletar(@PathVariable("lancamentoId") Long _lancamentoId) {
         lancamentoConvenioService.deletar(_lancamentoId);
     }
 

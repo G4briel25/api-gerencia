@@ -98,8 +98,12 @@ public class LancamentoAditivoController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("{_lancamentoId}")
-    public void deletar(@PathVariable("_lancamentoId") Long _lancamentoId) {
+    @DeleteMapping("{lancamentoId}")
+    public void deletar(
+            @PathVariable("lancamentoId") Long _lancamentoId,
+            @PathVariable("convenioId") Long _convenioId,
+            @PathVariable("aditivoId") Long _aditivoId
+    ) {
         lancamentoAditivoService.deletar(_lancamentoId);
     }
 
