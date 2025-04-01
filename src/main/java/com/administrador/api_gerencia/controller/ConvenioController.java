@@ -2,6 +2,7 @@ package com.administrador.api_gerencia.controller;
 
 import com.administrador.api_gerencia.exceptions.ResourceNotFoundException;
 import com.administrador.api_gerencia.model.Convenio;
+import com.administrador.api_gerencia.model.ConvenioViewFilter;
 import com.administrador.api_gerencia.model.ConvenioView;
 import com.administrador.api_gerencia.model.ConvenioViewDetalhado;
 import com.administrador.api_gerencia.service.ConvenioDetalhadoService;
@@ -43,6 +44,11 @@ public class ConvenioController {
     @GetMapping("{convenioId}/detalhado")
     public ConvenioViewDetalhado buscarPorIdDetalhado(@PathVariable("convenioId") Long _convenioId) {
         return convenioDetalhadoService.buscarConvenioDetalhado(_convenioId);
+    }
+
+    @PostMapping("filtrar")
+    public List<ConvenioView> filtrarConvenios(@RequestBody ConvenioViewFilter filtro) {
+        return convenioViewService.buscarConvenios(filtro);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
