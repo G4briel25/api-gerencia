@@ -24,6 +24,7 @@ public class UsuarioService {
 
     public Usuario salvar(Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuario.setRole("ADMIN");
         return repository.save(usuario);
     }
 

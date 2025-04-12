@@ -13,7 +13,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Permite todas as rotas
-                        .allowedOrigins("http://localhost:5173") // Origem do seu frontend
+                        .allowedOrigins(
+                                "https://gerencia-frontend.onrender.com",
+                                "https://transparencia.onrender.com"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
                         .allowedHeaders("*")
                         .allowCredentials(true);
