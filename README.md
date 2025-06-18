@@ -173,16 +173,12 @@ Campos: `nome`, `login`, `email`, `senha`, `role`.
 
 ---
 
-## 📎 Informações Técnicas
+## 📗 Documentação Swagger
 
-- **Base URL**: `https://api-gerencia.onrender.com`
-- **Documentação Swagger**: [https://api-gerencia.onrender.com/swagger-ui/index.html](https://api-gerencia.onrender.com/swagger-ui/index.html)
-> ⚠️ **Aviso importante:**  
-> A API utilizada por este sistema está hospedada na plataforma **Render**, na versão gratuita. Isso significa que, quando não há acesso por algum tempo, o servidor entra em modo de espera (*cold start*).  
-> **Ao abrir o sistema, pode ser necessário aguardar alguns segundos (ou minutos) até que a API seja reativada e todas as funcionalidades estejam disponíveis.**
-- **Formato OpenAPI**: 3.1.0
-- **Requer autenticação JWT para endpoints protegidos**
+![Tela da documentação swagger](/src/main/resources/static/api-swagger.png)
+
 
 ---
+## 👨‍💻 Autor
 
-👨‍💻 *Documentação gerada automaticamente a partir do arquivo Swagger (`/v3/api-docs`).*
+Desenvolvido por **Gabriel Jaune Ribera**.
